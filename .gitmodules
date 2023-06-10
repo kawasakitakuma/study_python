@@ -1,0 +1,3 @@
+[submodule "study_python"]
+	path = study_python
+	url = git@github.com:kawasakitakuma/study_python.git
