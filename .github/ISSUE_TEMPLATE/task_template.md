@@ -7,5 +7,4 @@ labels: task
 ## todo
 
 ## 完了条件
-
-- [ ]
+- [ ] 
