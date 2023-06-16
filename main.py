@@ -1,13 +1,13 @@
 from typing import Optional, List
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 class ShopInfo(BaseModel):
     name: str
     location: str
 
 class Item(BaseModel):
-    name: str
+    name: str = Field(min_length=4, max_length=12)
     description: Optional[str] = None
     price: int
     tax: Optional[float] = None
