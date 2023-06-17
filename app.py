@@ -1,17 +1,9 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 st.title('Sample App')
+df = pd. DataFrame(
+    np.random.randn(20, 3),
+    columns=['a','b','c'])
 
-df = pd.DataFrame({
-    '1列目': [1, 2, 3, 4],
-    '2列目': [-1, -2, -3, -4],
-})
-
-st.dataframe(df.style.highlight_max(axis=1))
-
-st.json({
-    'data':{
-        'name': 'abc',
-        'age': 123
-    }
-})
+st.bar_chart(df)
