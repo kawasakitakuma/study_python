@@ -25,9 +25,9 @@ app = FastAPI()
 async def index():
     return {"message" : "Success"}
 
-# @app.post("/users")
-# async def users(users: User):
-#     return {"users" : users}
+@app.post("/users")
+async def users(users: User):
+    return {"users" : users}
 
 # @app.post("/rooms")
 # async def rooms(rooms: Room):
