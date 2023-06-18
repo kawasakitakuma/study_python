@@ -29,9 +29,9 @@ async def index():
 async def users(users: User):
     return {"users" : users}
 
-# @app.post("/rooms")
-# async def rooms(rooms: Room):
-#     return {"rooms" : rooms}
+@app.post("/rooms")
+async def rooms(rooms: Room):
+    return {"rooms" : rooms}
 
 # @app.post("/bookings")
 # async def bookings(bookings: Booking):
