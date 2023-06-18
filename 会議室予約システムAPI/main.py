@@ -33,6 +33,6 @@ async def users(users: User):
 async def rooms(rooms: Room):
     return {"rooms" : rooms}
 
-# @app.post("/bookings")
-# async def bookings(bookings: Booking):
-#     return {"bookings" : bookings}
+@app.post("/bookings")
+async def bookings(bookings: Booking):
+    return {"bookings" : bookings}
