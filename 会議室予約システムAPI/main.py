@@ -13,3 +13,8 @@ class Booking(BaseModel):
 class User(BaseModel):
     user_id: int
     user_name: str = Field(max_length=12)
+
+class Room(BaseModel):
+    room_id: int
+    room_name: str = Field(max_length=12)
+    capacity: int
