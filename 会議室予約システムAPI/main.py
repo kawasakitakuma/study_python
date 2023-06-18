@@ -9,3 +9,7 @@ class Booking(BaseModel):
     booked_num: int
     start_datetime: datetime.datetime
     end_datetime: datetime.datetime
+
+class User(BaseModel):
+    user_id: int
+    user_name: str = Field(max_length=12)
