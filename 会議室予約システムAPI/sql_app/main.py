@@ -26,25 +26,25 @@ async def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_
     users = crud.get_users(db, skip=skip, limit=limit)
     return users
 
-@app.get("/room", response_model=List[schemas.Room])
+@app.get("/rooms", response_model=List[schemas.Room])
 async def read_room(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     rooms = crud.get_rooms(db, skip=skip, limit=limit)
     return rooms
 
-@app.get("/booking", response_model=List[schemas.Booking])
+@app.get("/bookings", response_model=List[schemas.Booking])
 async def read_booking(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     bookings = crud.get_bookings(db, skip=skip, limit=limit)
     return bookings
 
 # Create
-@app.post("/users")
-async def users(users: User):
-    return {"users" : users}
+@app.post("/users", response_model=schemas.User)
+async def create_users(user: schemas.UserCreate, db: Session = Depends(get_db)):
+    return crud.create_user(db=db, user=user)
 
-@app.post("/rooms")
-async def rooms(rooms: Room):
-    return {"rooms" : rooms}
+@app.post("/rooms", response_model=schemas.Room)
+async def create_rooms(room: schemas.RoomCreate, db: Session = Depends(get_db)):
+    return crud.create_room(db=db, room=room)
 
-@app.post("/bookings")
-async def bookings(bookings: Booking):
-    return {"bookings" : bookings}
+@app.post("/bookings", response_model=schemas.Booking)
+async def create_bookings(booking: schemas.Booking, db: Session = Depends(get_db)):
+    return crud.create_booking(db=db, booking=booking)
