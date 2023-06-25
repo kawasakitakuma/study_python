@@ -66,8 +66,8 @@ elif page == "bookings":
         users_dict[user["username"]] = user["user_id"]
 
     # 会議室一覧の取得
-    url_users = "http://127.0.0.1:8000/rooms"
-    res = requests.get(url_users)
+    url_rooms = "http://127.0.0.1:8000/rooms"
+    res = requests.get(url_rooms)
     rooms = res.json()
     rooms_dict = {}
     for room in rooms:
@@ -115,6 +115,7 @@ elif page == "bookings":
                 minute=end_time.minute
             ).isoformat()
         }
+
         # 定員以下の予約人数の場合
         if booked_num <= capacity:
             # 会議室予約
@@ -125,7 +126,6 @@ elif page == "bookings":
             )
             if res.status_code == 200:
                 st.success("予約完了しました")
-            st.write(res.status_code)
             st.json(res.json())
         
         else:
