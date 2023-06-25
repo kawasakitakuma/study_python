@@ -19,8 +19,6 @@ if page == "users":
         submit_button = st.form_submit_button(label="ユーザー登録")
 
     if submit_button:
-        st.write("## 送信データ")
-        st.write("## レスポンス結果")
         url = "http://127.0.0.1:8000/users"
         res = requests.post(
             url,
@@ -28,8 +26,6 @@ if page == "users":
         )
         if res.status_code == 200:
             st.success("ユーザー登録完了")
-        st.write(res.status_code)
-        st.json(res.json())
 
 elif page == "rooms":
     st.title("会議室登録画面")
@@ -52,8 +48,6 @@ elif page == "rooms":
         )
         if res.status_code == 200:
             st.success("会議室登録完了")
-        st.write(res.status_code)
-        st.json(res.json())
 
 elif page == "bookings":
     st.title("会議室予約画面")
@@ -156,8 +150,15 @@ elif page == "bookings":
             ).isoformat()
         }
 
-        # 定員以下の予約人数の場合
-        if booked_num <= capacity:
+        # 定員より多いの予約人数の場合
+        if booked_num > capacity:
+            st.error(f"{room_name}の定員は、{capacity}名です。{capacity}名以下の予約人数のみ受け付けております。")
+        # 開始時刻 >= 終了時刻
+        elif start_time >= end_time:
+            st.error("開始時刻が終了時刻を超えています")
+        elif start_time < datetime.time(hour=9, minute=0, second=0) or end_time > datetime.time(hour=20, minute=0, second=0):
+            st.error("利用時間は9:00~20:00になります")
+        else:
             # 会議室予約
             url = "http://127.0.0.1:8000/bookings"
             res = requests.post(
@@ -166,7 +167,5 @@ elif page == "bookings":
             )
             if res.status_code == 200:
                 st.success("予約完了しました")
-            st.json(res.json())
-        
-        else:
-            st.error(f"{room_name}の定員は、{capacity}名です。{capacity}名以下の予約人数のみ受け付けております。")
+            elif res.status_code == 404 and res.json()["detail"] == "Already booked" :
+                st.error("指定の時間にはすでに予約が入っています")

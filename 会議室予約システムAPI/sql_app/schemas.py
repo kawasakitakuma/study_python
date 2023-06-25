@@ -1,30 +1,18 @@
 import datetime
 from pydantic import BaseModel, Field
 
-# class BookingCreate(BaseModel):
-#     user_id: int
-#     room_id: int
-#     booked_num: int
-#     start_datetime: datetime.datetime
-#     end_datetime: datetime.datetime
-
-# class Booking(BaseModel):
-#     booking_id: int
-
-#     class Config:
-#         orm_mode = True
-
-class Booking(BaseModel):
-    booking_id: int
+class BookingCreate(BaseModel):
     user_id: int
     room_id: int
     booked_num: int
     start_datetime: datetime.datetime
     end_datetime: datetime.datetime
 
+class Booking(BookingCreate):
+    booking_id: int
+
     class Config:
         orm_mode = True
-
 
 class UserCreate(BaseModel):
     username: str = Field(max_length=12)
