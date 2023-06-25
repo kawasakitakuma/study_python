@@ -46,5 +46,5 @@ async def create_rooms(room: schemas.RoomCreate, db: Session = Depends(get_db)):
     return crud.create_room(db=db, room=room)
 
 @app.post("/bookings", response_model=schemas.Booking)
-async def create_bookings(booking: schemas.BookingCreate, db: Session = Depends(get_db)):
+async def create_bookings(booking: schemas.Booking, db: Session = Depends(get_db)):
     return crud.create_booking(db=db, booking=booking)
